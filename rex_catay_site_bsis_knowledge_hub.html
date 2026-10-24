@@ -1,0 +1,1231 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rex Catay Site | BSIS Knowledge Hub</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts: Inter & JetBrains Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        navy: {
+                            800: '#1e293b',
+                            900: '#0f172a',
+                            950: '#020617',
+                        },
+                        brand: {
+                            blue: '#0284c7',
+                            cyan: '#06b6d4',
+                            accent: '#38bdf8',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0f172a;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #1e293b;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #0284c7;
+        }
+        .glass-card {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .glass-nav {
+            background: rgba(15, 23, 42, 0.85);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .text-gradient {
+            background: linear-gradient(135deg, #38bdf8 0%, #06b6d4 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    </style>
+</head>
+<body class="bg-navy-950 text-slate-200 font-sans antialiased min-h-screen flex flex-col selection:bg-brand-cyan selection:text-navy-950">
+
+    <!-- TOP ANNOUNCEMENT BANNER -->
+    <div class="bg-gradient-to-r from-brand-blue to-brand-cyan text-slate-950 text-xs md:text-sm font-semibold py-2 px-4 text-center flex items-center justify-center gap-2 shadow-md">
+        <span class="bg-navy-950 text-white text-[10px] uppercase font-bold px-2 py-0.5 rounded-full">New</span>
+        <span>Welcome to Rex Catay Site — The Ultimate BSIS Academic & Reference Portal!</span>
+        <button onclick="openPublishGuide()" class="underline ml-2 hover:text-white transition-colors cursor-pointer text-xs font-bold">
+            <i class="fa-solid fa-cloud-arrow-up mr-1"></i>Publishing Guide
+        </button>
+    </div>
+
+    <!-- MAIN NAVBAR -->
+    <header class="sticky top-0 z-40 glass-nav transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Brand Logo & Title -->
+                <a href="#home" class="flex items-center space-x-3 group">
+                    <div class="w-11 h-11 rounded-xl bg-gradient-to-tr from-brand-blue to-brand-cyan p-0.5 shadow-lg shadow-brand-blue/20 group-hover:scale-105 transition-transform duration-300">
+                        <div class="w-full h-full bg-navy-900 rounded-[10px] flex items-center justify-center">
+                            <i class="fa-solid fa-graduation-cap text-brand-cyan text-xl"></i>
+                        </div>
+                    </div>
+                    <div>
+                        <span class="text-xl font-extrabold tracking-tight text-white block leading-tight">Rex Catay <span class="text-brand-cyan">Site</span></span>
+                        <span class="text-[10px] font-mono text-slate-400 tracking-wider uppercase">BSIS Knowledge Hub</span>
+                    </div>
+                </a>
+
+                <!-- Desktop Navigation Links -->
+                <nav class="hidden lg:flex items-center space-x-1">
+                    <a href="#home" class="px-3.5 py-2 rounded-lg text-sm font-medium text-slate-300 hover:text-white hover:bg-slate-800/60 transition-colors">Home</a>
+                    <a href="#library" class="px-3.5 py-2 rounded-lg text-sm font-medium text-slate-300 hover:text-white hover:bg-slate-800/60 transition-colors">Book Library</a>
+                    <a href="#curriculum" class="px-3.5 py-2 rounded-lg text-sm font-medium text-slate-300 hover:text-white hover:bg-slate-800/60 transition-colors">Curriculum</a>
+                    <a href="#resources" class="px-3.5 py-2 rounded-lg text-sm font-medium text-slate-300 hover:text-white hover:bg-slate-800/60 transition-colors">Resources</a>
+                    <a href="#about" class="px-3.5 py-2 rounded-lg text-sm font-medium text-slate-300 hover:text-white hover:bg-slate-800/60 transition-colors">About Rex Catay</a>
+                </nav>
+
+                <!-- Actions: Saved Books Counter & Request Button -->
+                <div class="hidden sm:flex items-center space-x-3">
+                    <button onclick="toggleSavedDrawer()" class="relative p-2.5 rounded-xl bg-slate-800/80 text-slate-300 hover:text-brand-cyan hover:bg-slate-800 transition-all border border-slate-700/50" title="View Saved Books">
+                        <i class="fa-solid fa-bookmark text-lg"></i>
+                        <span id="savedBadge" class="absolute -top-1 -right-1 bg-brand-cyan text-navy-950 text-[10px] font-extrabold w-5 h-5 rounded-full flex items-center justify-center shadow-md hidden">0</span>
+                    </button>
+
+                    <button onclick="openRequestModal()" class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-gradient-to-r from-brand-blue to-brand-cyan text-navy-950 font-semibold text-sm hover:brightness-110 transition-all shadow-md shadow-brand-blue/20">
+                        <i class="fa-solid fa-plus-circle"></i>
+                        <span>Request Book</span>
+                    </button>
+                </div>
+
+                <!-- Mobile Menu Toggle Button -->
+                <div class="lg:hidden flex items-center gap-2">
+                    <button onclick="toggleSavedDrawer()" class="relative p-2 rounded-lg bg-slate-800 text-slate-300 hover:text-brand-cyan">
+                        <i class="fa-solid fa-bookmark"></i>
+                        <span id="savedBadgeMobile" class="absolute -top-1 -right-1 bg-brand-cyan text-navy-950 text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center hidden">0</span>
+                    </button>
+                    <button id="mobileMenuBtn" onclick="toggleMobileMenu()" class="p-2.5 rounded-xl bg-slate-800/80 text-slate-300 hover:text-white border border-slate-700">
+                        <i id="menuIcon" class="fa-solid fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Navigation Menu Dropdown -->
+        <div id="mobileMenu" class="hidden lg:hidden bg-navy-900/95 border-b border-slate-800 backdrop-blur-xl px-4 pt-2 pb-6 space-y-2">
+            <a href="#home" onclick="toggleMobileMenu()" class="block px-4 py-2.5 rounded-lg text-slate-200 hover:bg-slate-800 font-medium">Home</a>
+            <a href="#library" onclick="toggleMobileMenu()" class="block px-4 py-2.5 rounded-lg text-slate-200 hover:bg-slate-800 font-medium">Book Library</a>
+            <a href="#curriculum" onclick="toggleMobileMenu()" class="block px-4 py-2.5 rounded-lg text-slate-200 hover:bg-slate-800 font-medium">Curriculum Overview</a>
+            <a href="#resources" onclick="toggleMobileMenu()" class="block px-4 py-2.5 rounded-lg text-slate-200 hover:bg-slate-800 font-medium">Learning Resources</a>
+            <a href="#about" onclick="toggleMobileMenu()" class="block px-4 py-2.5 rounded-lg text-slate-200 hover:bg-slate-800 font-medium">About Rex Catay</a>
+            <div class="pt-2 border-t border-slate-800 flex flex-col gap-2">
+                <button onclick="openRequestModal(); toggleMobileMenu();" class="w-full text-center py-2.5 rounded-xl bg-gradient-to-r from-brand-blue to-brand-cyan text-navy-950 font-bold text-sm">
+                    Request / Recommend Book
+                </button>
+                <button onclick="openPublishGuide(); toggleMobileMenu();" class="w-full text-center py-2.5 rounded-xl bg-slate-800 text-slate-300 hover:text-white font-medium text-sm">
+                    <i class="fa-solid fa-rocket mr-1 text-brand-cyan"></i> Free Publishing Guide
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="flex-grow">
+        <!-- HERO SECTION -->
+        <section id="home" class="relative overflow-hidden pt-12 pb-20 lg:pt-20 lg:pb-28">
+            <!-- Background Glow & Grid Graphic -->
+            <div class="absolute inset-0 bg-[linear-gradient(to_right,#1e293b15_1px,transparent_1px),linear-gradient(to_bottom,#1e293b15_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]"></div>
+            <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-brand-blue/15 rounded-full blur-3xl pointer-events-none"></div>
+
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                <div class="text-center max-w-4xl mx-auto">
+                    <!-- Badge -->
+                    <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-800/80 border border-slate-700/60 mb-6 backdrop-blur-md">
+                        <span class="flex h-2 w-2 rounded-full bg-brand-cyan animate-pulse"></span>
+                        <span class="text-xs font-semibold text-slate-300 tracking-wide">Academic Repository & Tech Hub</span>
+                    </div>
+
+                    <!-- Headline -->
+                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-tight mb-6">
+                        Empowering Future <br class="hidden sm:inline">
+                        <span class="text-gradient">Information Systems</span> Professionals
+                    </h1>
+
+                    <!-- Tagline -->
+                    <p class="text-base sm:text-lg lg:text-xl text-slate-400 mb-10 leading-relaxed font-light max-w-3xl mx-auto">
+                        Your curated digital repository for Bachelor of Science in Information Systems (BSIS) textbooks, reference materials, system architecture guides, and database management resources.
+                    </p>
+
+                    <!-- CTAs -->
+                    <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                        <a href="#library" class="w-full sm:w-auto px-8 py-4 rounded-xl bg-gradient-to-r from-brand-blue to-brand-cyan text-navy-950 font-bold text-base shadow-xl shadow-brand-blue/20 hover:brightness-110 transition-all flex items-center justify-center gap-2 group">
+                            <span>Browse BSIS Books</span>
+                            <i class="fa-solid fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+                        </a>
+                        <a href="#curriculum" class="w-full sm:w-auto px-8 py-4 rounded-xl bg-slate-800/80 hover:bg-slate-800 text-slate-200 border border-slate-700/80 font-semibold text-base transition-all flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-sitemap text-brand-cyan"></i>
+                            <span>Explore Curriculum</span>
+                        </a>
+                    </div>
+
+                    <!-- Quick Stats Banner -->
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-16 pt-10 border-t border-slate-800/80">
+                        <div class="p-4 rounded-2xl bg-slate-900/40 border border-slate-800/60">
+                            <div class="text-2xl sm:text-3xl font-extrabold text-white font-mono">100%</div>
+                            <div class="text-xs text-slate-400 mt-1">BSIS Curriculum Aligned</div>
+                        </div>
+                        <div class="p-4 rounded-2xl bg-slate-900/40 border border-slate-800/60">
+                            <div class="text-2xl sm:text-3xl font-extrabold text-brand-cyan font-mono">6+</div>
+                            <div class="text-xs text-slate-400 mt-1">Core Knowledge Domains</div>
+                        </div>
+                        <div class="p-4 rounded-2xl bg-slate-900/40 border border-slate-800/60">
+                            <div class="text-2xl sm:text-3xl font-extrabold text-white font-mono">Free</div>
+                            <div class="text-xs text-slate-400 mt-1">Open Academic Access</div>
+                        </div>
+                        <div class="p-4 rounded-2xl bg-slate-900/40 border border-slate-800/60">
+                            <div class="text-2xl sm:text-3xl font-extrabold text-brand-cyan font-mono">2026</div>
+                            <div class="text-xs text-slate-400 mt-1">Updated Syllabus References</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- BOOK LIBRARY SECTION -->
+        <section id="library" class="py-16 bg-navy-900/60 border-y border-slate-800/60 relative">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <!-- Section Header -->
+                <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4">
+                    <div>
+                        <div class="text-brand-cyan text-sm font-semibold tracking-wider uppercase mb-1">Curated Library Showcase</div>
+                        <h2 class="text-3xl sm:text-4xl font-bold text-white tracking-tight">BSIS Textbooks & References</h2>
+                    </div>
+                    <p class="text-slate-400 text-sm max-w-md">
+                        Handpicked literature essential for Systems Analysis, Database Administration, Enterprise Architecture, and Software Engineering.
+                    </p>
+                </div>
+
+                <!-- Search & Filters Toolbar -->
+                <div class="glass-card rounded-2xl p-4 md:p-6 mb-8 space-y-4">
+                    <!-- Search Input -->
+                    <div class="relative">
+                        <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-slate-400"></i>
+                        <input id="searchInput" type="text" oninput="handleSearch()" placeholder="Search books by title, author, keyword, or subject..." class="w-full bg-slate-950/80 border border-slate-700/80 rounded-xl pl-11 pr-10 py-3.5 text-slate-200 placeholder-slate-500 focus:outline-none focus:border-brand-cyan focus:ring-1 focus:ring-brand-cyan transition-all text-sm">
+                        <button id="clearSearchBtn" onclick="clearSearch()" class="hidden absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 hover:text-slate-300 p-1">
+                            <i class="fa-solid fa-xmark text-base"></i>
+                        </button>
+                    </div>
+
+                    <!-- Category Filter Buttons (Horizontal Scrollable) -->
+                    <div class="flex items-center gap-2 overflow-x-auto pb-2 pt-1 scrollbar-none" id="categoryContainer">
+                        <!-- Dynamic Buttons rendered via JavaScript -->
+                    </div>
+                </div>
+
+                <!-- Book Grid Container -->
+                <div id="booksGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Rendered dynamically -->
+                </div>
+
+                <!-- Empty Search State -->
+                <div id="emptyState" class="hidden text-center py-16 glass-card rounded-2xl my-6">
+                    <i class="fa-solid fa-book-open text-5xl text-slate-600 mb-4"></i>
+                    <h3 class="text-xl font-bold text-white mb-2">No Matching Books Found</h3>
+                    <p class="text-slate-400 text-sm max-w-md mx-auto mb-6">We couldn't find any BSIS textbooks matching your search parameters.</p>
+                    <button onclick="resetFilters()" class="px-5 py-2.5 rounded-xl bg-slate-800 text-slate-200 hover:text-white font-semibold text-sm border border-slate-700">
+                        Reset All Filters
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- BSIS CORE DOMAINS & CURRICULUM OVERVIEW -->
+        <section id="curriculum" class="py-20 relative">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-3xl mx-auto mb-16">
+                    <span class="text-brand-cyan text-sm font-semibold uppercase tracking-wider">Academic Framework</span>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-white mt-1 mb-4">BSIS Core Domains & Subjects</h2>
+                    <p class="text-slate-400 text-base">
+                        The Bachelor of Science in Information Systems bridges business operations and information technology. Explore the foundational pillars covered in our curated site library.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Domain 1 -->
+                    <div class="glass-card rounded-2xl p-6 hover:border-brand-cyan/50 transition-all duration-300 group">
+                        <div class="w-12 h-12 rounded-xl bg-brand-blue/10 border border-brand-blue/30 text-brand-cyan flex items-center justify-center text-xl mb-5 group-hover:bg-brand-blue group-hover:text-navy-950 transition-all">
+                            <i class="fa-solid fa-database"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-2">Information & Data Management</h3>
+                        <p class="text-slate-400 text-sm mb-4 leading-relaxed">
+                            Database systems, SQL, relational modeling, data warehousing, data governance, and big data architecture fundamentals.
+                        </p>
+                        <div class="text-xs text-brand-cyan font-mono font-semibold">Key Books: Database Processing, Data Strategy</div>
+                    </div>
+
+                    <!-- Domain 2 -->
+                    <div class="glass-card rounded-2xl p-6 hover:border-brand-cyan/50 transition-all duration-300 group">
+                        <div class="w-12 h-12 rounded-xl bg-brand-blue/10 border border-brand-blue/30 text-brand-cyan flex items-center justify-center text-xl mb-5 group-hover:bg-brand-blue group-hover:text-navy-950 transition-all">
+                            <i class="fa-solid fa-diagram-project"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-2">Systems Analysis & Architecture</h3>
+                        <p class="text-slate-400 text-sm mb-4 leading-relaxed">
+                            SDLC methodologies, requirement engineering, UML diagrams, Agile frameworks, and Enterprise Architecture design.
+                        </p>
+                        <div class="text-xs text-brand-cyan font-mono font-semibold">Key Books: Kendall SAD, Enterprise Architecture</div>
+                    </div>
+
+                    <!-- Domain 3 -->
+                    <div class="glass-card rounded-2xl p-6 hover:border-brand-cyan/50 transition-all duration-300 group">
+                        <div class="w-12 h-12 rounded-xl bg-brand-blue/10 border border-brand-blue/30 text-brand-cyan flex items-center justify-center text-xl mb-5 group-hover:bg-brand-blue group-hover:text-navy-950 transition-all">
+                            <i class="fa-solid fa-chart-line"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-2">IT Project Management</h3>
+                        <p class="text-slate-400 text-sm mb-4 leading-relaxed">
+                            Planning, scope management, risk assessment, resource allocation, and IT service management (ITIL) standards.
+                        </p>
+                        <div class="text-xs text-brand-cyan font-mono font-semibold">Key Books: IT Project Management (Kathy Schwalbe)</div>
+                    </div>
+
+                    <!-- Domain 4 -->
+                    <div class="glass-card rounded-2xl p-6 hover:border-brand-cyan/50 transition-all duration-300 group">
+                        <div class="w-12 h-12 rounded-xl bg-brand-blue/10 border border-brand-blue/30 text-brand-cyan flex items-center justify-center text-xl mb-5 group-hover:bg-brand-blue group-hover:text-navy-950 transition-all">
+                            <i class="fa-solid fa-code"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-2">Web & Mobile Application Dev</h3>
+                        <p class="text-slate-400 text-sm mb-4 leading-relaxed">
+                            Full-stack development, API integration, front-end UX/UI design, mobile applications, and cloud computing principles.
+                        </p>
+                        <div class="text-xs text-brand-cyan font-mono font-semibold">Focus: Modern Web Architectures & Stack</div>
+                    </div>
+
+                    <!-- Domain 5 -->
+                    <div class="glass-card rounded-2xl p-6 hover:border-brand-cyan/50 transition-all duration-300 group">
+                        <div class="w-12 h-12 rounded-xl bg-brand-blue/10 border border-brand-blue/30 text-brand-cyan flex items-center justify-center text-xl mb-5 group-hover:bg-brand-blue group-hover:text-navy-950 transition-all">
+                            <i class="fa-solid fa-shield-halved"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-2">IT Infrastructure & Security</h3>
+                        <p class="text-slate-400 text-sm mb-4 leading-relaxed">
+                            Networking fundamentals, cybersecurity, information assurance, enterprise compliance, and cloud deployment models.
+                        </p>
+                        <div class="text-xs text-brand-cyan font-mono font-semibold">Focus: Infrastructure Resilience & Security</div>
+                    </div>
+
+                    <!-- Domain 6 -->
+                    <div class="glass-card rounded-2xl p-6 hover:border-brand-cyan/50 transition-all duration-300 group">
+                        <div class="w-12 h-12 rounded-xl bg-brand-blue/10 border border-brand-blue/30 text-brand-cyan flex items-center justify-center text-xl mb-5 group-hover:bg-brand-blue group-hover:text-navy-950 transition-all">
+                            <i class="fa-solid fa-lightbulb"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-2">Business Intelligence & Analytics</h3>
+                        <p class="text-slate-400 text-sm mb-4 leading-relaxed">
+                            Data analytics, decision support systems (DSS), business process re-engineering, and AI/ML applications in IS.
+                        </p>
+                        <div class="text-xs text-brand-cyan font-mono font-semibold">Key Books: Data Strategy, Fundamentals of IS</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- LEARNING RESOURCES HUB -->
+        <section id="resources" class="py-16 bg-navy-900/60 border-y border-slate-800/60">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-center">
+                    <div class="lg:col-span-1">
+                        <span class="text-brand-cyan text-sm font-semibold uppercase tracking-wider">Student & Faculty Hub</span>
+                        <h2 class="text-3xl font-extrabold text-white mt-2 mb-4">Academic Tools & Resources</h2>
+                        <p class="text-slate-400 text-sm leading-relaxed mb-6">
+                            Beyond textbook references, the Rex Catay Site provides curated external guides, documentation, and academic toolkits to assist students in capstone research and project builds.
+                        </p>
+                        <button onclick="openRequestModal()" class="px-6 py-3 rounded-xl bg-gradient-to-r from-brand-blue to-brand-cyan text-navy-950 font-bold text-sm hover:brightness-110 transition-all">
+                            <i class="fa-solid fa-paper-plane mr-2"></i>Submit Resource Request
+                        </button>
+                    </div>
+
+                    <div class="lg:col-span-2 grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div class="glass-card p-5 rounded-xl flex items-start space-x-4">
+                            <div class="p-3 bg-slate-800 rounded-lg text-brand-cyan shrink-0">
+                                <i class="fa-solid fa-file-pdf text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-white font-bold text-base mb-1">Capstones & Case Studies</h4>
+                                <p class="text-slate-400 text-xs leading-relaxed">Sample capstone templates, ERD diagrams, and system architecture design documentations.</p>
+                            </div>
+                        </div>
+
+                        <div class="glass-card p-5 rounded-xl flex items-start space-x-4">
+                            <div class="p-3 bg-slate-800 rounded-lg text-brand-cyan shrink-0">
+                                <i class="fa-solid fa-terminal text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-white font-bold text-base mb-1">Database SQL Cheatsheets</h4>
+                                <p class="text-slate-400 text-xs leading-relaxed">Quick reference syntax sheets for MySQL, PostgreSQL, MS SQL Server, and Oracle DB.</p>
+                            </div>
+                        </div>
+
+                        <div class="glass-card p-5 rounded-xl flex items-start space-x-4">
+                            <div class="p-3 bg-slate-800 rounded-lg text-brand-cyan shrink-0">
+                                <i class="fa-solid fa-diagram-next text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-white font-bold text-base mb-1">UML Modeling Guides</h4>
+                                <p class="text-slate-400 text-xs leading-relaxed">Use Case, Sequence, Class, and Activity Diagram standards with best practices.</p>
+                            </div>
+                        </div>
+
+                        <div class="glass-card p-5 rounded-xl flex items-start space-x-4">
+                            <div class="p-3 bg-slate-800 rounded-lg text-brand-cyan shrink-0">
+                                <i class="fa-solid fa-cloud text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-white font-bold text-base mb-1">Free Hosting & Deployment</h4>
+                                <p class="text-slate-400 text-xs leading-relaxed">Step-by-step instructions to host IS projects live using GitHub Pages, Vercel, and Netlify.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ABOUT REX CATAY SECTION -->
+        <section id="about" class="py-20 relative">
+            <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="glass-card rounded-3xl p-8 sm:p-12 relative overflow-hidden border border-slate-700/60 shadow-2xl">
+                    <div class="absolute -right-16 -bottom-16 w-64 h-64 bg-brand-cyan/10 rounded-full blur-3xl"></div>
+                    
+                    <div class="flex flex-col md:flex-row items-center gap-8 relative z-10">
+                        <!-- Profile Card Icon / Avatar -->
+                        <div class="shrink-0 text-center">
+                            <div class="w-32 h-32 sm:w-40 sm:h-40 rounded-2xl bg-gradient-to-tr from-brand-blue to-brand-cyan p-1 shadow-xl shadow-brand-blue/20 mx-auto">
+                                <div class="w-full h-full bg-navy-900 rounded-[14px] flex flex-col items-center justify-center p-4">
+                                    <i class="fa-solid fa-user-gear text-5xl text-brand-cyan mb-2"></i>
+                                    <span class="text-xs font-mono text-slate-400">IS CURATOR</span>
+                                </div>
+                            </div>
+                            <div class="mt-3 inline-block px-3 py-1 rounded-full bg-slate-800 text-xs text-brand-cyan font-mono border border-slate-700">
+                                Educator & Tech Enthusiast
+                            </div>
+                        </div>
+
+                        <!-- Bio Content -->
+                        <div class="space-y-4 text-center md:text-left">
+                            <div class="inline-flex items-center gap-2 text-brand-cyan text-xs font-mono uppercase tracking-widest">
+                                <i class="fa-solid fa-circle-check"></i> Verified Educator Profile
+                            </div>
+                            <h2 class="text-3xl sm:text-4xl font-extrabold text-white">About Rex Catay</h2>
+                            <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
+                                Rex Catay is an Information Systems educator, academic curator, and passionate tech advocate committed to empowering students, researchers, and IT practitioners. 
+                            </p>
+                            <p class="text-slate-400 text-sm leading-relaxed">
+                                The <strong class="text-white">Rex Catay Site</strong> was established as an open academic portal to streamline access to essential literature, textbook summaries, enterprise architectural standards, and data management frameworks required in modern BSIS curricula.
+                            </p>
+
+                            <!-- Social/Contact Pill Links -->
+                            <div class="pt-4 flex flex-wrap items-center justify-center md:justify-start gap-3">
+                                <a href="mailto:rex.catay@example.com" class="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-medium border border-slate-700 transition-colors flex items-center gap-2">
+                                    <i class="fa-solid fa-envelope text-brand-cyan"></i> Academic Contact
+                                </a>
+                                <a href="#library" class="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-medium border border-slate-700 transition-colors flex items-center gap-2">
+                                    <i class="fa-solid fa-book text-brand-cyan"></i> Curated Books
+                                </a>
+                                <button onclick="openPublishGuide()" class="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-medium border border-slate-700 transition-colors flex items-center gap-2">
+                                    <i class="fa-solid fa-globe text-brand-cyan"></i> Web Hosting Guide
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER SECTION -->
+    <footer class="bg-navy-950 border-t border-slate-800/80 pt-12 pb-8 text-slate-400 text-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
+                <!-- Brand Info -->
+                <div class="md:col-span-2 space-y-4">
+                    <a href="#home" class="flex items-center space-x-3">
+                        <div class="w-9 h-9 rounded-lg bg-gradient-to-tr from-brand-blue to-brand-cyan p-0.5">
+                            <div class="w-full h-full bg-navy-900 rounded-[6px] flex items-center justify-center">
+                                <i class="fa-solid fa-graduation-cap text-brand-cyan text-base"></i>
+                            </div>
+                        </div>
+                        <span class="text-lg font-bold text-white">Rex Catay Site</span>
+                    </a>
+                    <p class="text-slate-400 text-xs max-w-sm leading-relaxed">
+                        Dedicated web portal for Bachelor of Science in Information Systems students. Providing open access to core textbook summaries, syllabus guides, and IT learning references.
+                    </p>
+                    <div class="flex items-center space-x-3 pt-2">
+                        <a href="#" class="w-8 h-8 rounded-lg bg-slate-800 flex items-center justify-center text-slate-300 hover:text-brand-cyan hover:bg-slate-700 transition-colors" title="Facebook"><i class="fa-brands fa-facebook-f text-xs"></i></a>
+                        <a href="#" class="w-8 h-8 rounded-lg bg-slate-800 flex items-center justify-center text-slate-300 hover:text-brand-cyan hover:bg-slate-700 transition-colors" title="LinkedIn"><i class="fa-brands fa-linkedin-in text-xs"></i></a>
+                        <a href="#" class="w-8 h-8 rounded-lg bg-slate-800 flex items-center justify-center text-slate-300 hover:text-brand-cyan hover:bg-slate-700 transition-colors" title="GitHub"><i class="fa-brands fa-github text-xs"></i></a>
+                        <a href="#" class="w-8 h-8 rounded-lg bg-slate-800 flex items-center justify-center text-slate-300 hover:text-brand-cyan hover:bg-slate-700 transition-colors" title="Twitter"><i class="fa-brands fa-x-twitter text-xs"></i></a>
+                    </div>
+                </div>
+
+                <!-- Quick Navigation -->
+                <div>
+                    <h4 class="text-white font-semibold text-xs tracking-wider uppercase mb-4">Quick Links</h4>
+                    <ul class="space-y-2.5 text-xs">
+                        <li><a href="#home" class="hover:text-brand-cyan transition-colors">Home Portal</a></li>
+                        <li><a href="#library" class="hover:text-brand-cyan transition-colors">BSIS Book Library</a></li>
+                        <li><a href="#curriculum" class="hover:text-brand-cyan transition-colors">Curriculum Framework</a></li>
+                        <li><a href="#resources" class="hover:text-brand-cyan transition-colors">Resource Center</a></li>
+                        <li><a href="#about" class="hover:text-brand-cyan transition-colors">About Educator</a></li>
+                    </ul>
+                </div>
+
+                <!-- Web Publishing Guide Highlight -->
+                <div>
+                    <h4 class="text-white font-semibold text-xs tracking-wider uppercase mb-4">Free Web Publishing</h4>
+                    <p class="text-slate-400 text-xs mb-3">Host this BSIS website online completely free of charge in under 5 minutes.</p>
+                    <button onclick="openPublishGuide()" class="w-full py-2 px-3 rounded-lg bg-slate-800 hover:bg-slate-700 text-brand-cyan text-xs font-semibold border border-slate-700 transition-all flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-rocket"></i> View Free Host Guide
+                    </button>
+                </div>
+            </div>
+
+            <div class="pt-8 border-t border-slate-800/80 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 gap-4">
+                <p>&copy; 2026 Rex Catay Site. Designed for BSIS Educational Community.</p>
+                <div class="flex items-center space-x-6">
+                    <a href="#" class="hover:text-slate-400">Academic Disclaimer</a>
+                    <a href="#" class="hover:text-slate-400">Terms of Use</a>
+                    <a href="#" class="hover:text-slate-400">Privacy Policy</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- MODAL 1: BOOK PREVIEW & DETAILS MODAL -->
+    <div id="bookModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-navy-950/80 backdrop-blur-md hidden transition-opacity duration-300">
+        <div class="glass-card max-w-2xl w-full rounded-2xl overflow-hidden max-h-[90vh] flex flex-col shadow-2xl border border-slate-700">
+            <!-- Modal Header -->
+            <div class="p-5 border-b border-slate-800 flex items-center justify-between bg-slate-900/80">
+                <div id="modalSubjectBadge" class="px-2.5 py-1 rounded-md bg-brand-blue/20 text-brand-cyan text-xs font-mono font-semibold">
+                    BSIS Subject
+                </div>
+                <button onclick="closeBookModal()" class="text-slate-400 hover:text-white p-1 rounded-lg">
+                    <i class="fa-solid fa-xmark text-xl"></i>
+                </button>
+            </div>
+
+            <!-- Modal Content (Scrollable) -->
+            <div class="p-6 overflow-y-auto space-y-6 flex-grow">
+                <div class="flex flex-col sm:flex-row gap-6">
+                    <!-- Book Cover Placeholder in Modal -->
+                    <div id="modalBookCover" class="w-32 h-44 shrink-0 rounded-xl bg-slate-800 border border-slate-700 flex flex-col items-center justify-center text-center p-3 shadow-lg mx-auto sm:mx-0">
+                        <!-- Rendered JS -->
+                    </div>
+
+                    <div class="space-y-3">
+                        <h3 id="modalBookTitle" class="text-2xl font-bold text-white leading-snug">Book Title</h3>
+                        <div id="modalBookAuthor" class="text-brand-cyan text-sm font-medium">Author Name</div>
+                        
+                        <!-- Rating system -->
+                        <div class="flex items-center space-x-2 pt-1">
+                            <div id="modalBookStars" class="text-amber-400 text-sm flex gap-1"></div>
+                            <span id="modalBookRatingText" class="text-xs text-slate-400 font-mono">(4.8 / 5.0)</span>
+                        </div>
+
+                        <p id="modalBookSummary" class="text-slate-300 text-sm leading-relaxed pt-2">
+                            Summary narrative goes here...
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Table of Contents Preview -->
+                <div class="bg-slate-900/60 rounded-xl p-4 border border-slate-800">
+                    <h4 class="text-white font-bold text-sm mb-3 flex items-center gap-2">
+                        <i class="fa-solid fa-list-ol text-brand-cyan"></i> Table of Contents Preview
+                    </h4>
+                    <ul id="modalTocList" class="space-y-2 text-xs text-slate-300 list-disc list-inside">
+                        <!-- TOC Items rendered dynamically -->
+                    </ul>
+                </div>
+
+                <!-- Submit Rating & Review Feature -->
+                <div class="bg-slate-900/40 rounded-xl p-4 border border-slate-800/80">
+                    <h4 class="text-white font-semibold text-sm mb-2">Leave a Student Rating</h4>
+                    <div class="flex items-center space-x-2 mb-3" id="userRatingStars">
+                        <i class="fa-regular fa-star text-amber-400 cursor-pointer text-lg hover:scale-110" onclick="setRating(1)"></i>
+                        <i class="fa-regular fa-star text-amber-400 cursor-pointer text-lg hover:scale-110" onclick="setRating(2)"></i>
+                        <i class="fa-regular fa-star text-amber-400 cursor-pointer text-lg hover:scale-110" onclick="setRating(3)"></i>
+                        <i class="fa-regular fa-star text-amber-400 cursor-pointer text-lg hover:scale-110" onclick="setRating(4)"></i>
+                        <i class="fa-regular fa-star text-amber-400 cursor-pointer text-lg hover:scale-110" onclick="setRating(5)"></i>
+                        <span id="userRatingVal" class="text-xs text-slate-400 ml-2 font-mono">Tap to rate</span>
+                    </div>
+                    <textarea id="userReviewText" rows="2" placeholder="Write a short review or note about this textbook..." class="w-full bg-slate-950/80 border border-slate-700/80 rounded-lg p-2.5 text-xs text-slate-200 placeholder-slate-500 focus:outline-none focus:border-brand-cyan"></textarea>
+                    <button onclick="submitUserReview()" class="mt-2 px-4 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-brand-cyan text-xs font-semibold border border-slate-700">
+                        Submit Review
+                    </button>
+                    <div id="reviewSuccessMsg" class="hidden text-xs text-emerald-400 mt-2">Thank you! Your review has been saved locally.</div>
+                </div>
+            </div>
+
+            <!-- Modal Footer -->
+            <div class="p-4 border-t border-slate-800 bg-slate-900/80 flex items-center justify-between gap-3">
+                <button id="modalSaveBtn" onclick="toggleSaveCurrentBook()" class="px-4 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold border border-slate-700 transition-colors flex items-center gap-2">
+                    <i class="fa-regular fa-bookmark"></i> Save to Favorites
+                </button>
+
+                <div class="flex items-center gap-2">
+                    <button onclick="closeBookModal()" class="px-4 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-medium">
+                        Close
+                    </button>
+                    <button onclick="triggerBookDownload()" class="px-5 py-2.5 rounded-xl bg-gradient-to-r from-brand-blue to-brand-cyan text-navy-950 font-bold text-xs hover:brightness-110 transition-all flex items-center gap-2">
+                        <i class="fa-solid fa-file-pdf"></i> Access Overview PDF
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL 2: REQUEST & RECOMMEND BOOK MODAL -->
+    <div id="requestModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-navy-950/80 backdrop-blur-md hidden transition-opacity duration-300">
+        <div class="glass-card max-w-lg w-full rounded-2xl overflow-hidden shadow-2xl border border-slate-700">
+            <div class="p-5 border-b border-slate-800 flex items-center justify-between bg-slate-900/80">
+                <div class="flex items-center gap-2 text-white font-bold text-lg">
+                    <i class="fa-solid fa-book-medical text-brand-cyan"></i>
+                    <span>Request or Recommend BSIS Book</span>
+                </div>
+                <button onclick="closeRequestModal()" class="text-slate-400 hover:text-white p-1">
+                    <i class="fa-solid fa-xmark text-xl"></i>
+                </button>
+            </div>
+
+            <form id="requestForm" onsubmit="handleRequestSubmit(event)" class="p-6 space-y-4">
+                <div>
+                    <label class="block text-xs font-semibold text-slate-300 mb-1">Book Title / Topic Name *</label>
+                    <input type="text" required placeholder="e.g. Modern Database Management" class="w-full bg-slate-950/80 border border-slate-700 rounded-xl px-3.5 py-2.5 text-sm text-slate-200 placeholder-slate-500 focus:outline-none focus:border-brand-cyan">
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-300 mb-1">Author / Publisher</label>
+                        <input type="text" placeholder="e.g. Jeffrey Hoffer" class="w-full bg-slate-950/80 border border-slate-700 rounded-xl px-3.5 py-2.5 text-sm text-slate-200 placeholder-slate-500 focus:outline-none focus:border-brand-cyan">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-300 mb-1">BSIS Subject Category</label>
+                        <select class="w-full bg-slate-950/80 border border-slate-700 rounded-xl px-3.5 py-2.5 text-sm text-slate-200 focus:outline-none focus:border-brand-cyan">
+                            <option>Database Systems</option>
+                            <option>Systems Analysis & Design</option>
+                            <option>Enterprise Architecture</option>
+                            <option>Data Analytics</option>
+                            <option>Web & Mobile Dev</option>
+                            <option>IT Security & Networks</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-semibold text-slate-300 mb-1">Your Email or Student ID</label>
+                    <input type="email" required placeholder="student@university.edu" class="w-full bg-slate-950/80 border border-slate-700 rounded-xl px-3.5 py-2.5 text-sm text-slate-200 placeholder-slate-500 focus:outline-none focus:border-brand-cyan">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-semibold text-slate-300 mb-1">Additional Notes / Reason for Request</label>
+                    <textarea rows="3" placeholder="Why is this book recommended for the BSIS curriculum?" class="w-full bg-slate-950/80 border border-slate-700 rounded-xl p-3 text-sm text-slate-200 placeholder-slate-500 focus:outline-none focus:border-brand-cyan"></textarea>
+                </div>
+
+                <div class="pt-2 flex items-center justify-end gap-3">
+                    <button type="button" onclick="closeRequestModal()" class="px-4 py-2.5 rounded-xl bg-slate-800 text-slate-300 hover:text-white text-xs font-medium">
+                        Cancel
+                    </button>
+                    <button type="submit" class="px-5 py-2.5 rounded-xl bg-gradient-to-r from-brand-blue to-brand-cyan text-navy-950 font-bold text-xs hover:brightness-110 transition-all">
+                        Submit Request
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL 3: FREE PUBLISHING GUIDE MODAL -->
+    <div id="publishGuideModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-navy-950/80 backdrop-blur-md hidden transition-opacity duration-300">
+        <div class="glass-card max-w-2xl w-full rounded-2xl overflow-hidden shadow-2xl border border-slate-700 flex flex-col max-h-[90vh]">
+            <div class="p-5 border-b border-slate-800 flex items-center justify-between bg-slate-900/80">
+                <div class="flex items-center gap-2 text-white font-bold text-lg">
+                    <i class="fa-solid fa-cloud-arrow-up text-brand-cyan"></i>
+                    <span>How to Publish "Rex Catay Site" Live for Free</span>
+                </div>
+                <button onclick="closePublishGuide()" class="text-slate-400 hover:text-white p-1">
+                    <i class="fa-solid fa-xmark text-xl"></i>
+                </button>
+            </div>
+
+            <div class="p-6 overflow-y-auto space-y-6 text-xs sm:text-sm text-slate-300">
+                <p class="leading-relaxed">
+                    You can publish this single-file BSIS web portal live on the internet using free cloud hosting platforms like GitHub Pages, Vercel, or Netlify.
+                </p>
+
+                <!-- Method 1: GitHub Pages -->
+                <div class="bg-slate-900/70 rounded-xl p-4 border border-slate-800 space-y-2">
+                    <h4 class="text-white font-bold text-base flex items-center gap-2">
+                        <i class="fa-brands fa-github text-brand-cyan"></i> Option 1: GitHub Pages (Recommended)
+                    </h4>
+                    <ol class="list-decimal list-inside space-y-1.5 text-slate-400">
+                        <li>Create a free account at <strong class="text-white">GitHub.com</strong>.</li>
+                        <li>Create a new repository named <code class="bg-slate-950 text-brand-cyan px-1.5 py-0.5 rounded">rex-catay-bsis-site</code>.</li>
+                        <li>Upload this file and rename it to <code class="bg-slate-950 text-white px-1.5 py-0.5 rounded">index.html</code>.</li>
+                        <li>Go to <strong class="text-white">Settings &gt; Pages</strong> in your repository.</li>
+                        <li>Under <strong class="text-white">Branch</strong>, select <code class="bg-slate-950 text-white px-1 rounded">main</code> and click <strong class="text-white">Save</strong>.</li>
+                        <li>Your site will be live at: <span class="text-brand-cyan font-mono">https://username.github.io/rex-catay-bsis-site/</span></li>
+                    </ol>
+                </div>
+
+                <!-- Method 2: Vercel / Netlify Drag and Drop -->
+                <div class="bg-slate-900/70 rounded-xl p-4 border border-slate-800 space-y-2">
+                    <h4 class="text-white font-bold text-base flex items-center gap-2">
+                        <i class="fa-solid fa-bolt text-amber-400"></i> Option 2: Netlify Drop (Instant)
+                    </h4>
+                    <ol class="list-decimal list-inside space-y-1.5 text-slate-400">
+                        <li>Save this file as <code class="bg-slate-950 text-white px-1.5 py-0.5 rounded">index.html</code> inside a folder.</li>
+                        <li>Go to <strong class="text-white">app.netlify.com/drop</strong>.</li>
+                        <li>Drag and drop the folder into the deployment box.</li>
+                        <li>Your site is instantly published with an SSL/HTTPS web URL!</li>
+                    </ol>
+                </div>
+            </div>
+
+            <div class="p-4 border-t border-slate-800 bg-slate-900/80 flex justify-end">
+                <button onclick="closePublishGuide()" class="px-5 py-2 rounded-xl bg-gradient-to-r from-brand-blue to-brand-cyan text-navy-950 font-bold text-xs">
+                    Got It, Thanks!
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- DRAWER: SAVED BOOKS / FAVORITES -->
+    <div id="savedDrawer" class="fixed inset-y-0 right-0 z-50 w-full sm:w-96 bg-navy-900 border-l border-slate-800 shadow-2xl transform translate-x-full transition-transform duration-300 flex flex-col">
+        <div class="p-5 border-b border-slate-800 flex items-center justify-between bg-slate-950/60">
+            <div class="flex items-center gap-2 text-white font-bold">
+                <i class="fa-solid fa-bookmark text-brand-cyan"></i>
+                <span>Saved BSIS Books</span>
+            </div>
+            <button onclick="toggleSavedDrawer()" class="text-slate-400 hover:text-white p-1">
+                <i class="fa-solid fa-xmark text-xl"></i>
+            </button>
+        </div>
+
+        <div id="savedBooksContainer" class="p-4 overflow-y-auto flex-grow space-y-3">
+            <!-- Rendered via JS -->
+        </div>
+
+        <div class="p-4 border-t border-slate-800 bg-slate-950/60 text-center">
+            <button onclick="clearAllSaved()" class="text-xs text-rose-400 hover:text-rose-300 font-semibold underline">
+                Clear Saved Books
+            </button>
+        </div>
+    </div>
+
+    <!-- TOAST NOTIFICATION -->
+    <div id="toast" class="fixed bottom-5 right-5 z-50 bg-slate-800 text-white text-xs font-semibold px-4 py-3 rounded-xl border border-slate-700 shadow-2xl flex items-center space-x-3 transform translate-y-20 opacity-0 transition-all duration-300">
+        <i id="toastIcon" class="fa-solid fa-circle-check text-emerald-400 text-base"></i>
+        <span id="toastMsg">Action completed successfully</span>
+    </div>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        // Sample BSIS Textbooks Data Dataset
+        const bsisBooks = [
+            {
+                id: 'book-1',
+                title: 'Systems Analysis and Design',
+                edition: '12th Edition',
+                author: 'Kenneth E. Kendall & Julie E. Kendall',
+                category: 'Systems Analysis & Design',
+                subjectCode: 'BSIS 201: Systems Analysis',
+                rating: 4.9,
+                summary: 'The standard academic textbook for learning modern system design, requirement modeling, agile SDLC methodologies, case diagrams, and user experience design in Information Systems.',
+                toc: [
+                    'Part I: Systems Analysis Fundamentals & Feasibility',
+                    'Part II: Information Requirements Analysis (UML, Use Cases)',
+                    'Part III: The Analysis Process & Data Flow Diagrams',
+                    'Part IV: Essentials of Design, Database Design & UI',
+                    'Part V: Software Engineering Quality Assurance & Implementation'
+                ],
+                bgGradient: 'from-blue-600 to-indigo-900'
+            },
+            {
+                id: 'book-2',
+                title: 'Database Processing: Fundamentals, Design, and Implementation',
+                edition: '15th Edition',
+                author: 'David M. Kroenke & David J. Auer',
+                category: 'Database Systems',
+                subjectCode: 'BSIS 202: Database Management',
+                rating: 4.8,
+                summary: 'Get a thorough grounding in SQL, relational database design, ER diagrams, normalization rules, transaction processing, and enterprise database administration.',
+                toc: [
+                    'Chapter 1: Introduction to Database Processing & SQL',
+                    'Chapter 2: Relational Model & Normalization (1NF to 5NF)',
+                    'Chapter 3: Entity-Relationship (E-R) Data Modeling',
+                    'Chapter 4: Database Design & SQL DDL/DML Statements',
+                    'Chapter 5: Enterprise DB Administration & Security'
+                ],
+                bgGradient: 'from-cyan-600 to-slate-900'
+            },
+            {
+                id: 'book-3',
+                title: 'Enterprise Architecture at Work',
+                edition: '4th Edition',
+                author: 'Marc Lankhorst et al.',
+                category: 'Enterprise Architecture',
+                subjectCode: 'BSIS 301: Enterprise Systems',
+                rating: 4.7,
+                summary: 'Comprehensive guide to enterprise architecture modeling, ArchiMate frameworks, TOGAF, and aligning business processes with IT infrastructure.',
+                toc: [
+                    'Unit 1: Fundamentals of Enterprise Architecture',
+                    'Unit 2: The ArchiMate Modeling Standard Language',
+                    'Unit 3: Architecture Description & Viewpoints',
+                    'Unit 4: Business, Application, and Technology Architecture',
+                    'Unit 5: EA Transformation & Governance'
+                ],
+                bgGradient: 'from-sky-600 to-blue-950'
+            },
+            {
+                id: 'book-4',
+                title: 'Data Strategy: How to Profit from Big Data, Analytics and AI',
+                edition: '2nd Edition',
+                author: 'Bernard Marr',
+                category: 'Data Analytics',
+                subjectCode: 'BSIS 303: Business Intelligence',
+                rating: 4.9,
+                summary: 'Explains how modern organisations leverage data assets, business intelligence, decision support systems, machine learning, and strategic metrics to drive decisions.',
+                toc: [
+                    'Section 1: Defining Your Data Strategy & Business Goals',
+                    'Section 2: Collecting Strategic Data & Big Data Pipelines',
+                    'Section 3: Transforming Data into Insights via AI & Analytics',
+                    'Section 4: Data Governance, Privacy, & Security Compliance',
+                    'Section 5: Executing & Scaling Data Infrastructure'
+                ],
+                bgGradient: 'from-teal-600 to-emerald-950'
+            },
+            {
+                id: 'book-5',
+                title: 'Information Technology Project Management',
+                edition: '9th Edition',
+                author: 'Kathy Schwalbe',
+                category: 'IT Infrastructure & Cybersecurity',
+                subjectCode: 'BSIS 305: IT Project Management',
+                rating: 4.8,
+                summary: 'The premiere guide for managing IT project teams, scope, timelines, cost estimation, risk management, and PMBOK/Agile methodologies.',
+                toc: [
+                    'Chapter 1: An Introduction to Project, Program, & Portfolio Management',
+                    'Chapter 2: The Project Management & Information Technology Context',
+                    'Chapter 3: Integration, Scope, & Schedule Management',
+                    'Chapter 4: Project Quality, Cost, & Resource Allocation',
+                    'Chapter 5: Project Risk & Stakeholder Communication'
+                ],
+                bgGradient: 'from-indigo-600 to-slate-900'
+            },
+            {
+                id: 'book-6',
+                title: 'Fundamentals of Information Systems',
+                edition: '9th Edition',
+                author: 'Ralph Stair & George Reynolds',
+                category: 'All',
+                subjectCode: 'BSIS 101: Introduction to IS',
+                rating: 4.7,
+                summary: 'An introductory academic foundation covering hardware, enterprise software, global networks, cyberethics, transaction processing, and management information systems.',
+                toc: [
+                    'Part 1: Information Systems in Global Organizations',
+                    'Part 2: Hardware, Software, & Cloud Infrastructure',
+                    'Part 3: Business Information Systems & ERP',
+                    'Part 4: Systems Development Life Cycle (SDLC)',
+                    'Part 5: Cyber Security, Ethics, & Privacy'
+                ],
+                bgGradient: 'from-slate-700 to-slate-950'
+            }
+        ];
+
+        // Categories List
+        const categories = [
+            'All',
+            'Systems Analysis & Design',
+            'Database Systems',
+            'Enterprise Architecture',
+            'Data Analytics',
+            'Web & Mobile Dev',
+            'IT Infrastructure & Cybersecurity'
+        ];
+
+        // App State Variables
+        let currentCategory = 'All';
+        let activeBookId = null;
+        let savedBookIds = JSON.parse(localStorage.getItem('rex_catay_saved_books')) || [];
+        let currentSelectedRating = 0;
+
+        // Initialize App on DOM Load
+        document.addEventListener('DOMContentLoaded', () => {
+            renderCategoryFilters();
+            renderBooks();
+            updateSavedBadge();
+        });
+
+        // Mobile Menu Toggle
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobileMenu');
+            const icon = document.getElementById('menuIcon');
+            menu.classList.toggle('hidden');
+            if(menu.classList.contains('hidden')){
+                icon.className = 'fa-solid fa-bars text-xl';
+            } else {
+                icon.className = 'fa-solid fa-xmark text-xl';
+            }
+        }
+
+        // Render Category Filter Buttons
+        function renderCategoryFilters() {
+            const container = document.getElementById('categoryContainer');
+            container.innerHTML = categories.map(cat => {
+                const isActive = cat === currentCategory;
+                const activeClasses = isActive 
+                    ? 'bg-gradient-to-r from-brand-blue to-brand-cyan text-navy-950 font-bold shadow-md' 
+                    : 'bg-slate-800/80 text-slate-300 hover:bg-slate-800 hover:text-white border border-slate-700/60 font-medium';
+                
+                return `<button onclick="filterCategory('${cat}')" class="px-4 py-2 rounded-xl text-xs whitespace-nowrap transition-all duration-200 ${activeClasses}">
+                    ${cat}
+                </button>`;
+            }).join('');
+        }
+
+        // Filter Category Handler
+        function filterCategory(category) {
+            currentCategory = category;
+            renderCategoryFilters();
+            renderBooks();
+        }
+
+        // Render Books Grid
+        function renderBooks() {
+            const grid = document.getElementById('booksGrid');
+            const emptyState = document.getElementById('emptyState');
+            const searchQuery = document.getElementById('searchInput').value.toLowerCase().trim();
+
+            const filtered = bsisBooks.filter(book => {
+                const matchesCategory = (currentCategory === 'All') || (book.category === currentCategory);
+                const matchesSearch = book.title.toLowerCase().includes(searchQuery) || 
+                                      book.author.toLowerCase().includes(searchQuery) || 
+                                      book.summary.toLowerCase().includes(searchQuery) ||
+                                      book.subjectCode.toLowerCase().includes(searchQuery);
+                return matchesCategory && matchesSearch;
+            });
+
+            if (filtered.length === 0) {
+                grid.innerHTML = '';
+                emptyState.classList.remove('hidden');
+                return;
+            }
+
+            emptyState.classList.add('hidden');
+            grid.innerHTML = filtered.map(book => {
+                const isSaved = savedBookIds.includes(book.id);
+                return `
+                <div class="glass-card rounded-2xl p-5 flex flex-col justify-between hover:border-brand-cyan/50 transition-all duration-300 group">
+                    <div>
+                        <!-- Cover Placeholder Visual -->
+                        <div class="h-44 rounded-xl bg-gradient-to-br ${book.bgGradient} p-4 flex flex-col justify-between mb-4 border border-white/10 shadow-lg relative overflow-hidden group-hover:scale-[1.02] transition-transform">
+                            <div class="flex items-center justify-between">
+                                <span class="px-2 py-0.5 rounded bg-black/40 text-[10px] font-mono text-brand-cyan border border-brand-cyan/30">${book.subjectCode}</span>
+                                <button onclick="toggleSaveBook('${book.id}', event)" class="w-8 h-8 rounded-full bg-black/40 hover:bg-black/60 flex items-center justify-center text-slate-200 transition-colors" title="${isSaved ? 'Unsave' : 'Save'}">
+                                    <i class="${isSaved ? 'fa-solid text-brand-cyan' : 'fa-regular'} fa-bookmark"></i>
+                                </button>
+                            </div>
+                            <div>
+                                <div class="text-xs text-slate-300 font-mono">${book.edition}</div>
+                                <h4 class="text-base font-bold text-white line-clamp-2 leading-tight">${book.title}</h4>
+                            </div>
+                        </div>
+
+                        <!-- Info -->
+                        <div class="flex items-center space-x-1 text-amber-400 text-xs mb-1">
+                            <i class="fa-solid fa-star"></i>
+                            <span class="font-bold text-white ml-1">${book.rating}</span>
+                            <span class="text-slate-400 font-normal">/ 5.0</span>
+                        </div>
+
+                        <h3 class="text-lg font-bold text-white group-hover:text-brand-cyan transition-colors line-clamp-1">${book.title}</h3>
+                        <p class="text-xs text-brand-cyan font-medium mb-2">${book.author}</p>
+                        <p class="text-slate-400 text-xs line-clamp-3 leading-relaxed mb-4">${book.summary}</p>
+                    </div>
+
+                    <!-- Actions -->
+                    <div class="pt-4 border-t border-slate-800 flex items-center justify-between gap-2">
+                        <button onclick="openBookModal('${book.id}')" class="flex-1 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold border border-slate-700 transition-colors flex items-center justify-center gap-1.5">
+                            <i class="fa-solid fa-eye text-brand-cyan"></i> Overview & TOC
+                        </button>
+                        <button onclick="openBookModal('${book.id}')" class="px-3 py-2 rounded-xl bg-brand-blue/20 hover:bg-brand-blue/40 text-brand-cyan text-xs font-semibold border border-brand-blue/40 transition-colors" title="Download Reference">
+                            <i class="fa-solid fa-file-pdf"></i>
+                        </button>
+                    </div>
+                </div>
+                `;
+            }).join('');
+        }
+
+        // Search Input Handler
+        function handleSearch() {
+            const query = document.getElementById('searchInput').value;
+            const clearBtn = document.getElementById('clearSearchBtn');
+            if(query.length > 0) {
+                clearBtn.classList.remove('hidden');
+            } else {
+                clearBtn.classList.add('hidden');
+            }
+            renderBooks();
+        }
+
+        function clearSearch() {
+            document.getElementById('searchInput').value = '';
+            document.getElementById('clearSearchBtn').classList.add('hidden');
+            renderBooks();
+        }
+
+        function resetFilters() {
+            currentCategory = 'All';
+            document.getElementById('searchInput').value = '';
+            document.getElementById('clearSearchBtn').classList.add('hidden');
+            renderCategoryFilters();
+            renderBooks();
+        }
+
+        // Open Book Details Modal
+        function openBookModal(bookId) {
+            activeBookId = bookId;
+            const book = bsisBooks.find(b => b.id === bookId);
+            if(!book) return;
+
+            document.getElementById('modalSubjectBadge').innerText = book.subjectCode;
+            document.getElementById('modalBookTitle').innerText = `${book.title} (${book.edition})`;
+            document.getElementById('modalBookAuthor').innerText = `Author(s): ${book.author}`;
+            document.getElementById('modalBookSummary').innerText = book.summary;
+            document.getElementById('modalBookRatingText').innerText = `(${book.rating} / 5.0 Rating)`;
+
+            // Cover Visual
+            document.getElementById('modalBookCover').className = `w-32 h-44 shrink-0 rounded-xl bg-gradient-to-br ${book.bgGradient} p-3 flex flex-col justify-between text-left shadow-lg mx-auto sm:mx-0 border border-white/20`;
+            document.getElementById('modalBookCover').innerHTML = `
+                <span class="text-[9px] font-mono text-brand-cyan uppercase bg-black/40 px-1.5 py-0.5 rounded w-max">${book.category}</span>
+                <div>
+                    <span class="text-[10px] text-slate-300 block font-mono">${book.edition}</span>
+                    <span class="text-xs font-bold text-white line-clamp-3">${book.title}</span>
+                </div>
+            `;
+
+            // Render Stars
+            const fullStars = Math.floor(book.rating);
+            let starsHtml = '';
+            for(let i=0; i<fullStars; i++) starsHtml += '<i class="fa-solid fa-star"></i>';
+            if(book.rating % 1 !== 0) starsHtml += '<i class="fa-solid fa-star-half-stroke"></i>';
+            document.getElementById('modalBookStars').innerHTML = starsHtml;
+
+            // Render TOC
+            const tocList = document.getElementById('modalTocList');
+            tocList.innerHTML = book.toc.map(item => `<li>${item}</li>`).join('');
+
+            // Save Button state in Modal
+            updateModalSaveButtonState();
+
+            // Show Modal
+            const modal = document.getElementById('bookModal');
+            modal.classList.remove('hidden');
+        }
+
+        function closeBookModal() {
+            document.getElementById('bookModal').classList.add('hidden');
+            document.getElementById('reviewSuccessMsg').classList.add('hidden');
+        }
+
+        // Bookmark / Favorite Book System
+        function toggleSaveBook(bookId, event) {
+            if(event) event.stopPropagation();
+            if(savedBookIds.includes(bookId)) {
+                savedBookIds = savedBookIds.filter(id => id !== bookId);
+                showToast("Removed book from saved collection.", "info");
+            } else {
+                savedBookIds.push(bookId);
+                showToast("Book saved to your personal library!", "success");
+            }
+            localStorage.setItem('rex_catay_saved_books', JSON.stringify(savedBookIds));
+            updateSavedBadge();
+            renderBooks();
+            renderSavedDrawerContent();
+            updateModalSaveButtonState();
+        }
+
+        function toggleSaveCurrentBook() {
+            if(activeBookId) {
+                toggleSaveBook(activeBookId, null);
+            }
+        }
+
+        function updateModalSaveButtonState() {
+            const btn = document.getElementById('modalSaveBtn');
+            if(!btn || !activeBookId) return;
+            const isSaved = savedBookIds.includes(activeBookId);
+            if(isSaved) {
+                btn.innerHTML = `<i class="fa-solid fa-bookmark text-brand-cyan"></i> Saved in Collection`;
+                btn.className = "px-4 py-2.5 rounded-xl bg-brand-blue/20 text-brand-cyan text-xs font-semibold border border-brand-blue/40 transition-colors flex items-center gap-2";
+            } else {
+                btn.innerHTML = `<i class="fa-regular fa-bookmark"></i> Save to Favorites`;
+                btn.className = "px-4 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold border border-slate-700 transition-colors flex items-center gap-2";
+            }
+        }
+
+        function updateSavedBadge() {
+            const badge = document.getElementById('savedBadge');
+            const badgeMobile = document.getElementById('savedBadgeMobile');
+            const count = savedBookIds.length;
+            if(count > 0) {
+                badge.innerText = count;
+                badge.classList.remove('hidden');
+                badgeMobile.innerText = count;
+                badgeMobile.classList.remove('hidden');
+            } else {
+                badge.classList.add('hidden');
+                badgeMobile.classList.add('hidden');
+            }
+        }
+
+        // Drawer: Saved Books
+        function toggleSavedDrawer() {
+            const drawer = document.getElementById('savedDrawer');
+            drawer.classList.toggle('translate-x-full');
+            if(!drawer.classList.contains('translate-x-full')) {
+                renderSavedDrawerContent();
+            }
+        }
+
+        function renderSavedDrawerContent() {
+            const container = document.getElementById('savedBooksContainer');
+            if(savedBookIds.length === 0) {
+                container.innerHTML = `
+                <div class="text-center py-12 text-slate-500">
+                    <i class="fa-solid fa-bookmark text-4xl mb-3 text-slate-600"></i>
+                    <p class="text-sm font-semibold">No Saved Books Yet</p>
+                    <p class="text-xs mt-1">Click the bookmark icon on any book to store it here.</p>
+                </div>
+                `;
+                return;
+            }
+
+            const savedBooks = bsisBooks.filter(b => savedBookIds.includes(b.id));
+            container.innerHTML = savedBooks.map(book => `
+                <div class="p-3 rounded-xl bg-slate-800/80 border border-slate-700 flex items-center justify-between space-x-3">
+                    <div class="flex-grow min-w-0">
+                        <h5 class="text-xs font-bold text-white truncate">${book.title}</h5>
+                        <p class="text-[11px] text-brand-cyan truncate">${book.author}</p>
+                    </div>
+                    <button onclick="toggleSaveBook('${book.id}', event)" class="text-slate-400 hover:text-rose-400 p-1.5" title="Remove">
+                        <i class="fa-solid fa-trash-can text-xs"></i>
+                    </button>
+                </div>
+            `).join('');
+        }
+
+        function clearAllSaved() {
+            savedBookIds = [];
+            localStorage.removeItem('rex_catay_saved_books');
+            updateSavedBadge();
+            renderSavedDrawerContent();
+            renderBooks();
+            showToast("Saved library cleared.", "info");
+        }
+
+        // Interactive Rating Star Handler
+        function setRating(val) {
+            currentSelectedRating = val;
+            const container = document.getElementById('userRatingStars');
+            const stars = container.querySelectorAll('i');
+            stars.forEach((star, index) => {
+                if(index < val) {
+                    star.className = 'fa-solid fa-star text-amber-400 cursor-pointer text-lg';
+                } else {
+                    star.className = 'fa-regular fa-star text-amber-400 cursor-pointer text-lg';
+                }
+            });
+            document.getElementById('userRatingVal').innerText = `${val} / 5 Stars`;
+        }
+
+        function submitUserReview() {
+            if(currentSelectedRating === 0) {
+                showToast("Please tap a star rating first.", "info");
+                return;
+            }
+            document.getElementById('reviewSuccessMsg').classList.remove('hidden');
+            showToast("Review submitted successfully!", "success");
+        }
+
+        // Trigger Download Simulation
+        function triggerBookDownload() {
+            showToast("Opening BSIS Literature Reference Document...", "success");
+            setTimeout(() => {
+                alert("Rex Catay Site: Reference Overview PDF requested for " + (activeBookId ? "Selected BSIS Book" : "Book") + ". Note: In a production environment, this triggers direct download from the academic server.");
+            }, 300);
+        }
+
+        // Request Modal Handlers
+        function openRequestModal() {
+            document.getElementById('requestModal').classList.remove('hidden');
+        }
+
+        function closeRequestModal() {
+            document.getElementById('requestModal').classList.add('hidden');
+        }
+
+        function handleRequestSubmit(e) {
+            e.preventDefault();
+            closeRequestModal();
+            showToast("Thank you! Book request sent to Rex Catay.", "success");
+            document.getElementById('requestForm').reset();
+        }
+
+        // Free Publishing Guide Modal
+        function openPublishGuide() {
+            document.getElementById('publishGuideModal').classList.remove('hidden');
+        }
+
+        function closePublishGuide() {
+            document.getElementById('publishGuideModal').classList.add('hidden');
+        }
+
+        // Toast Helper
+        function showToast(message, type = "success") {
+            const toast = document.getElementById('toast');
+            const toastMsg = document.getElementById('toastMsg');
+            const toastIcon = document.getElementById('toastIcon');
+
+            toastMsg.innerText = message;
+            if(type === "success") {
+                toastIcon.className = "fa-solid fa-circle-check text-emerald-400 text-base";
+            } else {
+                toastIcon.className = "fa-solid fa-circle-info text-brand-cyan text-base";
+            }
+
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            setTimeout(() => {
+                toast.classList.add('translate-y-20', 'opacity-0');
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
